@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: resthub
+Metadata: {}
+
+Conditions: {}
+
+Parameters:
+  Env:
+    Type: String
+    AllowedValues:
+      - local
+      - develop
+      - staging
+      - production
+    Default: local
+
+Resources:
+  NetworkStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: ./deploy/network.yml
+  LambdaStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: ./deploy/api.yml
+
+Outputs:

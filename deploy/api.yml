@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: construct api
+
+Globals:
+  Function:
+    Runtime: python3.8
+    Timeout: 5
+    MemorySize: 128
+    Environment:
+      Variables:
+        TZ: !Ref TimeZone
+        ENV: !Ref Env
+  Api:
+    EndpointConfiguration: EDGE
+    Cors:
+      AllowMethods: "'*'"
+      AllowHeaders: "'*'"
+      AllowOrigin: "'*'"
+
+Parameters:
+  TimeZone:
+    Type: String
+    Default: "Asia/Tokyo"
+
+Metadata: {}
+
+Mappings: {}
+
+Conditions: {}
+
+Resources:
+  ApiResource:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: api
+      DefinitionBody:
+        "Fn::Transform":
+          Name: AWS::Include
+          Parameters:
+            Location: ../reference/resthub.v1.yaml
+
+Outputs: {}

@@ -3,9 +3,22 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+package = "aws cloudformation package --s3-bucket omitsuhashi-deploy --profile private --template-file ./template.yml --output-template-file ./package.yml"
+deploy = "aws cloudformation deploy --template-file package.yml --stack-name test --profile private"
+migration = "env PYTHONPATH=. alembic revision --autogenerate -m"
+migrate = "env PYTHONPATH=. alembic upgrade head"
+
 [packages]
+sqlalchemy = "*"
+mysqlclient = "*"
 
 [dev-packages]
+boto3 = "*"
+flake8 = "*"
+hacking = "*"
+db-layer = {editable = true, path = "./layers/db_layer"}
+alembic = "*"
 
 [requires]
 python_version = "3.8"
