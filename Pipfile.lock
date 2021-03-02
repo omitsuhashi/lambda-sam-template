@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4b98489472b5fff5860369a2609539ff9901a18a08d531776b1b10137482d2ab"
+            "sha256": "ce0da47a2405d760840635450d22c3222d920f2184f94d185caf215ccbab207a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -123,6 +123,10 @@
             ],
             "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==0.10.0"
+        },
+        "lib-layer": {
+            "editable": true,
+            "path": "./layers/lib_layer"
         },
         "mako": {
             "hashes": [
