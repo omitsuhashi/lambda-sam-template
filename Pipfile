@@ -20,6 +20,7 @@ hacking = "*"
 db-layer = {editable = true, path = "./layers/db_layer"}
 alembic = "*"
 lib-layer = {editable = true, path = "./layers/lib_layer"}
+coverage = "*"
 
 [requires]
 python_version = "3.8"
