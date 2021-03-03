@@ -39,4 +39,11 @@ Resources:
           Parameters:
             Location: ../reference/resthub.v1.yaml
 
+  CreateUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LambdaExecutionRole
+      CodeUri: ../handlers/create_user
+      Handler: app.lambda_handler
+
 Outputs: {}

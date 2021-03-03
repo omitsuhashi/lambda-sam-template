@@ -4,10 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
-package = "aws cloudformation package --s3-bucket omitsuhashi-deploy --profile private --template-file ./template.yml --output-template-file ./package.yml"
-deploy = "aws cloudformation deploy --template-file package.yml --stack-name test --profile private"
 migration = "env PYTHONPATH=. alembic revision --autogenerate -m"
 migrate = "env PYTHONPATH=. alembic upgrade head"
+test = "coverage run -m unittest"
+coverage = "coverage report"
 
 [packages]
 sqlalchemy = "*"
