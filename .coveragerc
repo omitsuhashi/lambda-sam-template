@@ -1,0 +1,8 @@
+[run]
+source = .
+include = handlers
+omit = tests/*,.venv/*,*/__init__.py
+
+[report]
+show_missing = True
+skip_covered = False

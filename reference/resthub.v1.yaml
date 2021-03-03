@@ -1,0 +1,29 @@
+openapi: 3.0.0
+tags:
+  - name: admin
+  - name: user
+info:
+  title: resthub
+  version: '1.0'
+  contact:
+    email: osamu.mitsuhashi224@gmail.com
+  description: RestHub api document
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /users:
+    post:
+      summary: Create New User
+      operationId: post-user
+      tags:
+        - user
+      responses:
+        '201':
+          description: User Created
+      description: ユーザー作成
+      x-amazon-apigateway-integration:
+        uri:
+          'Fn::Sub': 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CreateUser.Arn}/invocations'
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: aws_proxy

@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: resthub
+Globals:
+  Function:
+    Runtime: python3.8
+    Timeout: 3
+  Api:
+    EndpointConfiguration: EDGE
+    Cors:
+      AllowMethods: "'*'"
+      AllowHeaders: "'*'"
+      AllowOrigin: "'*'"
+
+Parameters:
+  Env:
+    Type: String
+    AllowedValues:
+      - local
+      - develop
+      - staging
+      - production
+    Default: local
+
+Resources:
+#  NetworkStack:
+#    Type: AWS::CloudFormation::Stack
+#    Properties:
+#      TemplateURL: ./deploy/network.yml
+#  ApiStack:
+#    Type: AWS::CloudFormation::Stack
+#    Properties:
+#      TemplateURL: ./deploy/api.yml
+  ApiResource:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: api
+      DefinitionBody:
+        "Fn::Transform":
+          Name: AWS::Include
+          Parameters:
+            Location: ./reference/resthub.v1.yaml
+  CreateUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !Sub arn:aws:iam::${AWS::AccountId}:role/LambdaExecutionRole
+      CodeUri: handlers/create_user
+      Handler: app.lambda_handler

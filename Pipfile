@@ -3,9 +3,24 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+migration = "env PYTHONPATH=. alembic revision --autogenerate -m"
+migrate = "env PYTHONPATH=. alembic upgrade head"
+test = "coverage run -m unittest"
+coverage = "coverage report"
+
 [packages]
+sqlalchemy = "*"
+mysqlclient = "*"
 
 [dev-packages]
+boto3 = "*"
+flake8 = "*"
+hacking = "*"
+db-layer = {editable = true, path = "./layers/db_layer"}
+alembic = "*"
+lib-layer = {editable = true, path = "./layers/lib_layer"}
+coverage = "*"
 
 [requires]
 python_version = "3.8"

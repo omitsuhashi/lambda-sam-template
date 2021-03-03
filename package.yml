@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: resthub
+Metadata: {}
+Conditions: {}
+Parameters:
+  Env:
+    Type: String
+    AllowedValues:
+    - local
+    - develop
+    - staging
+    - production
+    Default: local
+Resources:
+  NetworkStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.ap-northeast-1.amazonaws.com/omitsuhashi-deploy/80137c52ac2e326087b8da875e531045.template
+  LambdaStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.ap-northeast-1.amazonaws.com/omitsuhashi-deploy/d586d53053b2e8ae48440a10c12cfe25.template
+Outputs: null
